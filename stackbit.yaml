@@ -1,0 +1,617 @@
+stackbitVersion: ~0.2.34
+ssgName: jekyll
+ssgVersion: 0.1.12
+buildCommand: ./ssg-build.sh
+publishDir: _site
+staticDir: ''
+uploadDir: images
+dataDir: _data
+pagesDir: ''
+pageLayoutKey: layout
+metadata:
+  title: Altitude
+  description: a multipage theme with a carousel slider
+  author: Pixelarity
+  authorURL: 'https://pixelarity.com'
+  palettes:
+    cyan:
+      images:
+        small: images/demo-cyan-256x192.png
+        large: images/demo-cyan-1024x768.png
+    purple:
+      images:
+        small: images/demo-purple-256x192.png
+        large: images/demo-purple-1024x768.png
+stackbit_banner:
+  show_banner: false
+  name: Altitude
+  create_url: 'https://app.stackbit.com/create?theme=altitude'
+  github_url: 'https://github.com/stackbithq/stackbit-theme-altitude'
+models:
+  config:
+    type: config
+    label: Config
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Site title
+        required: true
+      - type: string
+        name: baseurl
+        label: Base URL
+        description: Serve the website from the given base URL
+        hidden: true
+      - type: string
+        name: permalink
+        label: Permalink
+        description: 'The output path for your pages, posts, or collections.'
+        default: '/posts/:slug:output_ext'
+        hidden: true
+      - type: enum
+        name: palette
+        label: Color Palette
+        options:
+          - cyan
+          - purple
+      - type: object
+        name: palettes
+        label: Palettes
+        hidden: true
+        fields:
+          - type: palette
+            name: cyan
+            label: Cyan
+          - type: palette
+            name: purple
+            label: Purple
+      - type: object
+        name: sass
+        label: Sass
+        hidden: true
+        fields:
+          - type: number
+            name: indentWidth
+            label: Indent Width
+            description: >-
+              Used to determine the number of spaces or tabs to be used for
+              indentation.
+            default: 4
+          - type: enum
+            name: style
+            label: Output Style
+            description: Determines the output format of the final CSS style.
+            options:
+              - nested
+              - expanded
+              - compact
+              - compressed
+            default: nested
+          - type: number
+            name: precision
+            label: Precision
+            description: >-
+              Used to determine how many digits after the decimal will be
+              allowed.
+            default: 10
+      - type: list
+        name: plugins
+        label: Plugins
+        hidden: true
+      - type: list
+        name: exclude
+        label: Exclude
+        description: Exclude directories and/or files from the conversion.
+        hidden: true
+  menu:
+    type: data
+    file: menu.yml
+    label: Menu Configuration
+    fields:
+      - type: list
+        name: actions
+        label: Action Buttons
+        description: List of action buttons
+        items:
+          type: action
+  footer:
+    type: data
+    file: footer.yml
+    label: Footer Configuration
+    fields:
+      - type: object
+        name: contact
+        label: Contact
+        description: The contact section of the footer
+        fields:
+          - type: string
+            name: title
+            label: Title
+            description: The contact section title
+          - type: markdown
+            name: subtitle
+            label: Subtitle
+            description: The contact section subtitle
+      - type: link_column
+        name: links_col1
+        label: First links column
+      - type: link_column
+        name: links_col2
+        label: Second links column
+      - type: link_column
+        name: links_col3
+        label: Third links column
+      - type: link_column
+        name: links_col4
+        label: Fourth links column
+      - type: list
+        name: social_links
+        label: Social Links
+        description: Contact Methods
+        items:
+          type: object
+          labelField: text
+          fields:
+            - type: string
+              name: text
+              label: Contact method description
+            - type: string
+              name: icon
+              label: Icon
+              description: Font Awesome Icon
+            - type: string
+              name: link
+              label: URL
+              widget: url
+      - type: string
+        name: copyright
+        label: Copyright
+        description: Copyright displayed at the bottom of the page
+      - type: list
+        name: links
+        label: Copyright Links
+        description: 'A list of links displayed in the footer, next to the copyright text.'
+        items:
+          type: object
+          labelField: text
+          fields:
+            - type: string
+              name: text
+              label: Link text
+            - type: string
+              name: url
+              label: URL
+              widget: url
+            - type: boolean
+              name: new_window
+              label: Open in new window
+              default: true
+  home:
+    type: page
+    label: Home
+    template: home
+    hideContent: true
+    singleInstance: true
+    file: index.md
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Page title
+      - type: object
+        name: banner
+        label: Banner
+        description: Home page banner
+        fields:
+          - type: list
+            name: items
+            label: Banner sections
+            description: Sections displayed on the left side of the banner
+            items:
+              type: object
+              labelField: title
+              fields:
+                - type: string
+                  name: title
+                  label: Section Title
+                  description: Banner Section Title
+                - type: markdown
+                  name: subtitle
+                  label: Banner Section Subtitle
+                  description: The text that appears below the banner section title
+                - type: enum
+                  name: accent_color
+                  label: Banner Item Color
+                  options:
+                    - accent1
+                    - accent2
+                    - accent3
+                  default: accent1
+                  required: true
+                - type: object
+                  name: action
+                  label: Banner Section Action
+                  description: The action button for the banner section
+                  fields:
+                    - type: string
+                      name: label
+                      label: Label
+                    - type: string
+                      name: url
+                      label: URL
+                      widget: url
+                    - type: boolean
+                      name: is_scrolly
+                      label: Is Scrolly
+                      default: false
+                    - type: boolean
+                      name: is_primary
+                      label: Is Primary
+                      default: true
+          - type: list
+            name: slider
+            label: Banner Image Slider
+            description: List of images to be displayed in the banner image slider
+            items:
+              type: object
+              labelField: img_title
+              fields:
+                - type: image
+                  name: img_path
+                  label: Image
+                - type: string
+                  name: img_title
+                  label: Image Title
+                  required: true
+                  default: image
+                  description: The title of the image (only used in the CMS)
+                - type: string
+                  name: data_position
+                  label: Image Data Position
+                  description: 'Example: top left'
+      - type: boolean
+        name: show_contact
+        label: Show Contact Section
+        default: false
+        description: Displays the contact section at the bottom of the page
+      - type: list
+        name: sections
+        label: Sections
+        description: Home Sections
+        items:
+          type: reference
+          labelField: title
+          models:
+            - features
+            - carousel
+            - spotlight
+      - type: page_menus
+        name: menus
+        label: Home Menus
+        description: Which menus should this page show up in
+  page:
+    type: page
+    label: Page
+    template: page
+    fields:
+      - type: string
+        name: title
+        label: Page Title
+        required: true
+      - type: markdown
+        name: subtitle
+        label: Page Subtitle
+        description: Appears below the page title
+      - type: image
+        name: content_img_path
+        label: Content Image
+      - type: object
+        name: home_sections
+        label: Home Sections
+        description: If page is to be featured in the home page carousel or spotlights
+        fields:
+          - type: object
+            name: spotlight
+            label: Spotlight
+            description: Home page spotlight
+            fields:
+              - type: boolean
+                name: enabled
+                label: Enabled
+                default: false
+              - type: object
+                name: image
+                label: Home Spotlight Image
+                fields:
+                  - type: image
+                    name: url
+                    label: Image
+                  - type: string
+                    name: data_position
+                    label: Data Position
+                    description: 'example: left'
+              - type: string
+                name: title
+                label: Home Spotlight Title
+              - type: string
+                name: excerpt
+                label: Home Spotlight Excerpt
+                description: Excerpt to bedisplayed in the home spotlight
+              - type: number
+                name: weight
+                label: Spotlight Weight
+                description: The index of the spotlight in home spotlights
+          - type: object
+            name: carousel
+            label: Carousel
+            description: Home page Carousel
+            fields:
+              - type: boolean
+                name: enabled
+                label: Enabled
+                default: false
+              - type: object
+                name: image
+                label: Home Carousel Image
+                fields:
+                  - type: image
+                    name: url
+                    label: Image
+                  - type: string
+                    name: data_position
+                    label: Data Position
+                    description: 'example: left'
+              - type: string
+                name: title
+                label: Carousel Section Title
+              - type: markdown
+                name: subtitle
+                label: Carousel Section Subtitle
+                description: Text below the section title
+              - type: number
+                name: weight
+                label: Carousel Weight
+                description: The index of the carousel section
+      - type: page_menus
+        name: menus
+        label: Page Menus
+        description: Which menus should this page show up in
+  elements:
+    type: page
+    label: Elements
+    template: elements
+    hideContent: true
+    singleInstance: true
+    file: elements.md
+    fields:
+      - type: string
+        name: title
+        label: Title
+      - type: markdown
+        name: subtitle
+        label: Subtitle
+      - type: page_menus
+        name: menus
+        label: Elements Menus
+        description: Which menus should this page show up in
+  section:
+    type: object
+    label: Section
+    labelField: title
+    fields:
+      - type: string
+        name: title
+        label: Title
+        required: true
+        description: >-
+          Section title (Also used bt the CMS, even if it is not displayed on
+          the page)
+      - type: string
+        name: component
+        label: Component
+        required: true
+        hidden: true
+  features:
+    type: object
+    label: Features
+    extends:
+      - section
+    fields:
+      - name: title
+        default: Features Section
+      - name: component
+        const: features.html
+      - type: markdown
+        name: subtitle
+        label: Subtitle
+        description: Text below the section title
+      - type: list
+        name: features
+        label: Features List
+        description: The list of features
+        items:
+          type: object
+          labelField: title
+          fields:
+            - type: string
+              name: title
+              label: Feature Title
+            - type: markdown
+              name: subtitle
+              label: Feature Subtitle
+            - type: string
+              name: icon
+              label: Feature Icon
+              description: Font Awesome Icon
+            - type: enum
+              name: icon_accent_color
+              label: Icon Accent Color
+              options:
+                - accent1
+                - accent2
+                - accent3
+                - accent4
+  carousel:
+    type: object
+    label: Carousel
+    extends:
+      - section
+    fields:
+      - name: title
+        default: Carousel Title
+      - type: enum
+        name: background_accent_color
+        label: Background Accent Color
+        options:
+          - accent1
+          - accent2
+          - accent3
+          - accent4
+        description: Sets the color used for the section background
+      - name: component
+        const: carousel.html
+  spotlight:
+    type: object
+    label: Spotlight
+    extends:
+      - section
+    fields:
+      - name: title
+        default: Spotlight Section
+      - name: component
+        const: spotlight.html
+      - type: markdown
+        name: subtitle
+        label: Spotlight Section Subtitle
+  action:
+    type: object
+    label: Action
+    labelField: label
+    fields:
+      - type: string
+        name: label
+        label: Label
+      - type: string
+        name: url
+        label: URL
+        widget: url
+      - type: boolean
+        name: is_scrolly
+        label: IS Scrolly
+        default: false
+      - type: boolean
+        name: is_primary
+        label: Is Primary
+        default: false
+  link_column:
+    type: object
+    label: Link Column
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Column title
+      - type: list
+        name: links
+        label: Links
+        description: Column links
+        items:
+          type: object
+          labelField: text
+          fields:
+            - type: string
+              name: text
+              label: Link text
+            - type: string
+              name: link
+              label: URL
+              widget: url
+  palette:
+    type: object
+    label: Palette
+    fields:
+      - type: object
+        name: sass
+        label: SASS
+        fields:
+          - type: color
+            name: accent2
+            label: accent2
+          - type: color
+            name: accent3
+            label: accent3
+          - type: color
+            name: accent4
+            label: accent4
+  site_menus:
+    type: data
+    file: menus.yml
+    label: Site Menus
+    labelField: null
+    description: >-
+      Site menus model, defines list of menus that can be specified from within
+      site configuration
+    fields:
+      - type: list
+        name: main
+        label: Main menu
+        description: List of items for Main menu
+        items:
+          type: site_menu_item
+  site_menu_item:
+    type: object
+    label: Site Menu Item
+    labelField: title
+    description: 'Site menu item model, defines fields for a single site menu item'
+    fields:
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item
+        required: true
+      - type: string
+        name: title
+        label: Title
+        description: The title of the menu item
+        required: true
+      - type: string
+        name: url
+        label: URL
+        description: The URL the menu item links to
+        required: true
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+  page_menus:
+    type: object
+    label: Page Menus
+    labelField: null
+    description: 'Page menus model, defines menus that can be specified from within pages'
+    fields:
+      - type: page_menu_item
+        name: main
+        label: Main menu item
+        description: Main menu item for this page
+  page_menu_item:
+    type: object
+    label: Page Menu Item
+    labelField: title
+    description: 'Page menu item model, defines fields for a single page menu item'
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the menu item
+      - type: number
+        name: weight
+        label: Weight
+        description: Position for sorting
+      - type: string
+        name: identifier
+        label: Identifier
+        description: >-
+          The identifier of a menu item could be used as a parent menu of
+          another menu item

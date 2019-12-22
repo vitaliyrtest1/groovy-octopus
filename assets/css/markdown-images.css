@@ -1,0 +1,7 @@
+.wrapper .inner .main img,
+.carousel article .content img,
+.main .major img,
+.main .features section img,
+#banner .items section img{
+    max-width: 100%;
+}

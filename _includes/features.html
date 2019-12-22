@@ -1,0 +1,16 @@
+<!-- Section -->
+<section class="main">
+    <header class="major">
+        <h2>{{ include.section.title }}</h2>
+        {{ include.section.subtitle | markdownify }}
+    </header>
+    <div class="features">
+        {% for feature in include.section.features %}
+            <section>
+                <span class="icon {{ feature.icon }} major {{ feature.icon_accent_color }}"></span>
+                <h3>{{ feature.title }}</h3>
+                {{ feature.subtitle | markdownify }}
+            </section>
+        {% endfor %}
+    </div>
+</section>

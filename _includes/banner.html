@@ -1,0 +1,24 @@
+<!-- Banner -->
+<section id="banner">
+    <div class="items">
+        {% for item in page.banner.items %}
+            <section class="{{ item.accent_color }}">
+                <h1>{{ item.title }}</h1>
+                {{ item.subtitle | markdownify }}
+                {% assign action_is_not_empty = item.action | is_not_empty %}
+                {% if action_is_not_empty %}
+                    <ul class="actions special">
+                        <li><a href="{% assign expr_1 = item.action.url | starts_with: '#' %}{% if expr_1 %}{{ item.action.url }}{% else %}{{ item.action.url | link | relative_url }}{% endif %}" class="button{% assign is_primary_is_not_empty = item.action.is_primary | is_not_empty %}{% if is_primary_is_not_empty %} primary{% endif %}{% assign is_scrolly_is_not_empty = item.action.is_scrolly | is_not_empty %}{% if is_scrolly_is_not_empty %} scrolly{% endif %}">{{ item.action.label }}</a></li>
+                    </ul>
+                {% endif %}
+            </section>
+        {% endfor %}
+    </div>
+    <div class="slider">
+        {% for slide in page.banner.slider %}
+            <article>
+                <img src="{{ slide.img_path | relative_url }}" alt="" data-position="{{ slide.data_position }}" />
+            </article>
+        {% endfor %}
+    </div>
+</section>

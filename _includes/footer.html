@@ -1,0 +1,86 @@
+<!-- Wrapper -->
+<div class="wrapper">
+    <div class="inner">
+        
+        {% assign show_contact_is_not_empty = page.show_contact | is_not_empty %}
+        {% if show_contact_is_not_empty %}
+            {% include contact.html %}
+        {% endif %}
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="links">
+                {% assign links_col1_is_not_empty = site.data.footer.links_col1 | is_not_empty %}
+                {% if links_col1_is_not_empty %}
+                    <div>
+                        <h3>{{ site.data.footer.links_col1.title }}</h3>
+                        <ul class="plain">
+                            {% for item in site.data.footer.links_col1.links %}
+                                <li><a class="footerLink" href="{{ item.link | link | relative_url }}">{{ item.text }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% assign links_col2_is_not_empty = site.data.footer.links_col2 | is_not_empty %}
+                {% if links_col2_is_not_empty %}
+                    <div>
+                        <h3>{{ site.data.footer.links_col2.title }}</h3>
+                        <ul class="plain">
+                            {% for item in site.data.footer.links_col2.links %}
+                                <li><a class="footerLink" href="{{ item.link | link | relative_url }}">{{ item.text }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% assign links_col3_is_not_empty = site.data.footer.links_col3 | is_not_empty %}
+                {% if links_col3_is_not_empty %}
+                    <div>
+                        <h3>{{ site.data.footer.links_col3.title }}</h3>
+                        <ul class="plain">
+                            {% for item in site.data.footer.links_col3.links %}
+                                <li><a class="footerLink" href="{{ item.link | link | relative_url }}">{{ item.text }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% assign links_col4_is_not_empty = site.data.footer.links_col4 | is_not_empty %}
+                {% if links_col4_is_not_empty %}
+                    <div>
+                        <h3>{{ site.data.footer.links_col4.title }}</h3>
+                        <ul class="plain">
+                            {% for item in site.data.footer.links_col4.links %}
+                                <li><a class="footerLink" href="{{ item.link | link | relative_url }}">{{ item.text }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </section>
+            {% assign social_links_is_not_empty = site.data.footer.social_links | is_not_empty %}
+            {% if social_links_is_not_empty %}
+                <ul class="contact-icons">
+                    {% for item in site.data.footer.social_links %}
+                        {% assign link_is_not_empty = item.link | is_not_empty %}
+                        {% if link_is_not_empty %}
+                            <li class="icon {{ item.icon }}"><a href="{{ item.link }}">{{ item.text }}</a></li>
+                        {% else %}
+                            <li class="icon {{ item.icon }}">{{ item.text }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% assign copyright_is_not_empty = site.data.footer.copyright | is_not_empty %}
+            {% if copyright_is_not_empty %}
+                <p class="copyright">
+                    {{ site.data.footer.copyright }}
+                    &nbsp;
+                    {% for link in site.data.footer.links %}
+                        <a href="{{ link.url }}" {% assign new_window_is_not_empty = link.new_window | is_not_empty %}
+                        {% if new_window_is_not_empty %}target="_blank" rel="noopener"
+                        {% endif %}>{{ link.text }}</a>.
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </footer>
+
+    </div>
+</div>

@@ -1,0 +1,25 @@
+---
+layout: body
+---
+
+    <!-- Wrapper -->
+    <div class="wrapper">
+        <div class="inner">
+            
+            <!-- Main -->
+            <section class="main">
+                
+                <header class="major">
+                    <h1>{{ page.title }}</h1>
+                    {{ page.subtitle | markdownify }}
+                </header>
+                
+                {% assign content_img_path_is_not_empty = page.content_img_path | is_not_empty %}
+                {% if content_img_path_is_not_empty %}
+                    <a href="#" class="image main"><img src="{{ page.content_img_path | relative_url }}" alt="" /></a>
+                {% endif %}
+                {{ content }}
+                
+            </section>
+        </div>
+    </div>

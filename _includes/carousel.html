@@ -1,0 +1,17 @@
+<!-- Section -->
+<section id="carousel" class="carousel {{ include.section.background_accent_color }}">
+    {% assign arr = '/' | get_pages | where_exp: "item", "item.home_sections.carousel.enabled == true" | sort: 'home_sections.carousel.weight' %}
+    {% for page in arr %}
+        <article>
+            <div class="image"><img src="{{ page.home_sections.carousel.image.url | relative_url }}" alt="" data-position="{{ page.home_sections.carousel.image.data_position }}" /></div>
+            <div class="content">
+                <a href="{{ page.url }}"><h3>{{ page.home_sections.carousel.title }}</h3></a>
+                {{ page.home_sections.carousel.subtitle | markdownify }}
+            </div>
+        </article>
+    {% endfor %}
+    <nav>
+        <a href="#" class="previous"><span class="label">Previous</span></a>
+        <a href="#" class="next"><span class="label">Next</span></a>
+    </nav>
+</section>
